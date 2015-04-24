@@ -1,0 +1,6 @@
+E:\Raz\BLL\bin\Debug\BLL.dll
+E:\Raz\BLL\bin\Debug\BLL.pdb
+E:\Raz\BLL\obj\Debug\ResolveAssemblyReference.cache
+E:\Raz\BLL\obj\Debug\BLL.dll
+E:\Raz\BLL\obj\Debug\BLL.pdb
+E:\Raz\BLL\bin\Debug\BLL.dll.config

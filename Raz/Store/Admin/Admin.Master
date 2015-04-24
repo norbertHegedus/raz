@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Raz.Store.Admin.Admin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+  
+   <div id="AdminMenu">
+      <div class="AdminSideNavTitle">
+                <h1>
+                    <img src="../../Images/Default/movie.png" />
+                    <asp:HyperLink ID="HyperLinkSections" runat="server">Pagini</asp:HyperLink></h1> <%-- sdssdds--%>
+            </div>
+       <asp:Panel ID="PanelSections" runat="server" Visible="true">
+          <asp:ListView ID="lvSections" runat="server">
+               <LayoutTemplate>
+                   <ul style="margin-bottom: 0px;">
+                       <li id="itemPlaceholder" runat="server" />
+                   </ul>
+               </LayoutTemplate>
+               <ItemTemplate>
+                   <li><a href="<%#Eval("URL")%>">
+                       <%#Eval("MenuName")%></a></li>
+               </ItemTemplate>
+           </asp:ListView>
+       </asp:Panel>
+   </div>
+
+    
+     <div id="AdminRightContent">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        </div>
+   
+    </form>
+</body>
+</html>

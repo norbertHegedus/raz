@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="StoreRepository" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="StoreRepositoryContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SectionDetails" EntityType="StoreRepository.SectionDetail" />
+    <EntitySet Name="Sections" EntityType="StoreRepository.Section" />
+    <EntitySet Name="SectionTypes" EntityType="StoreRepository.SectionType" />
+    <AssociationSet Name="FK_SectionDetails_Sections" Association="StoreRepository.FK_SectionDetails_Sections">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="SectionDetail" EntitySet="SectionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sections_Sections" Association="StoreRepository.FK_Sections_Sections">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="Section1" EntitySet="Sections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sections_SectionTypes" Association="StoreRepository.FK_Sections_SectionTypes">
+      <End Role="SectionType" EntitySet="SectionTypes" />
+      <End Role="Section" EntitySet="Sections" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SectionDetail">
+    <Key>
+      <PropertyRef Name="SectionID" />
+    </Key>
+    <Property Type="Int32" Name="SectionID" Nullable="false" />
+    <Property Type="String" Name="PageDescription" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PageTitle" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PageKeywords" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Section" Relationship="StoreRepository.FK_SectionDetails_Sections" FromRole="SectionDetail" ToRole="Section" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="SectionID" />
+    </Key>
+    <Property Type="Int32" Name="SectionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="SectionIDP" />
+    <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="UrlNice" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="SectionTypeID" />
+    <Property Type="DateTime" Name="AddedData" />
+    <Property Type="String" Name="AddedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="UpdateData" />
+    <Property Type="String" Name="UpdateBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Active" />
+    <Property Type="Int32" Name="Importance" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SectionDetail" Relationship="StoreRepository.FK_SectionDetails_Sections" FromRole="Section" ToRole="SectionDetail" />
+    <NavigationProperty Name="Sections1" Relationship="StoreRepository.FK_Sections_Sections" FromRole="Section" ToRole="Section1" />
+    <NavigationProperty Name="Section1" Relationship="StoreRepository.FK_Sections_Sections" FromRole="Section1" ToRole="Section" />
+    <NavigationProperty Name="SectionType" Relationship="StoreRepository.FK_Sections_SectionTypes" FromRole="Section" ToRole="SectionType" />
+  </EntityType>
+  <EntityType Name="SectionType">
+    <Key>
+      <PropertyRef Name="SectionTypeID" />
+    </Key>
+    <Property Type="Int32" Name="SectionTypeID" Nullable="false" />
+    <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Sections" Relationship="StoreRepository.FK_Sections_SectionTypes" FromRole="SectionType" ToRole="Section" />
+  </EntityType>
+  <Association Name="FK_SectionDetails_Sections">
+    <End Type="StoreRepository.Section" Role="Section" Multiplicity="1" />
+    <End Type="StoreRepository.SectionDetail" Role="SectionDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="SectionDetail">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sections_Sections">
+    <End Type="StoreRepository.Section" Role="Section" Multiplicity="0..1" />
+    <End Type="StoreRepository.Section" Role="Section1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Section1">
+        <PropertyRef Name="SectionIDP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sections_SectionTypes">
+    <End Type="StoreRepository.SectionType" Role="SectionType" Multiplicity="0..1" />
+    <End Type="StoreRepository.Section" Role="Section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SectionType">
+        <PropertyRef Name="SectionTypeID" />
+      </Principal>
+      <Dependent Role="Section">
+        <PropertyRef Name="SectionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

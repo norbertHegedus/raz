@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+  <Alias Key="Model" Value="StoreRepository" />
+  <Alias Key="Target" Value="StoreRepository.Store" />
+  <EntityContainerMapping CdmEntityContainer="StoreRepositoryContainer" StorageEntityContainer="StoreRepositoryStoreContainer">
+    <EntitySetMapping Name="SectionDetails">
+      <EntityTypeMapping TypeName="StoreRepository.SectionDetail">
+        <MappingFragment StoreEntitySet="SectionDetails">
+          <ScalarProperty Name="PageKeywords" ColumnName="PageKeywords" />
+          <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+          <ScalarProperty Name="PageDescription" ColumnName="PageDescription" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sections">
+      <EntityTypeMapping TypeName="StoreRepository.Section">
+        <MappingFragment StoreEntitySet="Sections">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Importance" ColumnName="Importance" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateData" ColumnName="UpdateData" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedData" ColumnName="AddedData" />
+          <ScalarProperty Name="SectionTypeID" ColumnName="SectionTypeID" />
+          <ScalarProperty Name="UrlNice" ColumnName="UrlNice" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SectionIDP" ColumnName="SectionIDP" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SectionTypes">
+      <EntityTypeMapping TypeName="StoreRepository.SectionType">
+        <MappingFragment StoreEntitySet="SectionTypes">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SectionTypeID" ColumnName="SectionTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

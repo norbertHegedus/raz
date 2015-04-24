@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StoreRepository.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="StoreRepositoryStoreContainer">
+          <EntitySet Name="SectionDetails" EntityType="StoreRepository.Store.SectionDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sections" EntityType="StoreRepository.Store.Sections" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SectionTypes" EntityType="StoreRepository.Store.SectionTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_SectionDetails_Sections" Association="StoreRepository.Store.FK_SectionDetails_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="SectionDetails" EntitySet="SectionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sections_Sections" Association="StoreRepository.Store.FK_Sections_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Sections1" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sections_SectionTypes" Association="StoreRepository.Store.FK_Sections_SectionTypes">
+            <End Role="SectionTypes" EntitySet="SectionTypes" />
+            <End Role="Sections" EntitySet="Sections" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SectionDetails">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="PageDescription" Type="nvarchar(max)" />
+          <Property Name="PageTitle" Type="nvarchar(max)" />
+          <Property Name="PageKeywords" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SectionIDP" Type="int" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="UrlNice" Type="nvarchar(max)" />
+          <Property Name="SectionTypeID" Type="int" />
+          <Property Name="AddedData" Type="datetime" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdateData" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Importance" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SectionTypes">
+          <Key>
+            <PropertyRef Name="SectionTypeID" />
+          </Key>
+          <Property Name="SectionTypeID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_SectionDetails_Sections">
+          <End Role="Sections" Type="StoreRepository.Store.Sections" Multiplicity="1" />
+          <End Role="SectionDetails" Type="StoreRepository.Store.SectionDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="SectionDetails">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sections_Sections">
+          <End Role="Sections" Type="StoreRepository.Store.Sections" Multiplicity="0..1" />
+          <End Role="Sections1" Type="StoreRepository.Store.Sections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Sections1">
+              <PropertyRef Name="SectionIDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sections_SectionTypes">
+          <End Role="SectionTypes" Type="StoreRepository.Store.SectionTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sections" Type="StoreRepository.Store.Sections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionTypes">
+              <PropertyRef Name="SectionTypeID" />
+            </Principal>
+            <Dependent Role="Sections">
+              <PropertyRef Name="SectionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="StoreRepository" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="StoreRepositoryContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SectionDetails" EntityType="StoreRepository.SectionDetail" />
+          <EntitySet Name="Sections" EntityType="StoreRepository.Section" />
+          <EntitySet Name="SectionTypes" EntityType="StoreRepository.SectionType" />
+          <AssociationSet Name="FK_SectionDetails_Sections" Association="StoreRepository.FK_SectionDetails_Sections">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="SectionDetail" EntitySet="SectionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sections_Sections" Association="StoreRepository.FK_Sections_Sections">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Section1" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sections_SectionTypes" Association="StoreRepository.FK_Sections_SectionTypes">
+            <End Role="SectionType" EntitySet="SectionTypes" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SectionDetail">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Type="Int32" Name="SectionID" Nullable="false" />
+          <Property Type="String" Name="PageDescription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PageTitle" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PageKeywords" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Section" Relationship="StoreRepository.FK_SectionDetails_Sections" FromRole="SectionDetail" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Type="Int32" Name="SectionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SectionIDP" />
+          <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UrlNice" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SectionTypeID" />
+          <Property Type="DateTime" Name="AddedData" />
+          <Property Type="String" Name="AddedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="UpdateData" />
+          <Property Type="String" Name="UpdateBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Active" />
+          <Property Type="Int32" Name="Importance" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SectionDetail" Relationship="StoreRepository.FK_SectionDetails_Sections" FromRole="Section" ToRole="SectionDetail" />
+          <NavigationProperty Name="Sections1" Relationship="StoreRepository.FK_Sections_Sections" FromRole="Section" ToRole="Section1" />
+          <NavigationProperty Name="Section1" Relationship="StoreRepository.FK_Sections_Sections" FromRole="Section1" ToRole="Section" />
+          <NavigationProperty Name="SectionType" Relationship="StoreRepository.FK_Sections_SectionTypes" FromRole="Section" ToRole="SectionType" />
+        </EntityType>
+        <EntityType Name="SectionType">
+          <Key>
+            <PropertyRef Name="SectionTypeID" />
+          </Key>
+          <Property Type="Int32" Name="SectionTypeID" Nullable="false" />
+          <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sections" Relationship="StoreRepository.FK_Sections_SectionTypes" FromRole="SectionType" ToRole="Section" />
+        </EntityType>
+        <Association Name="FK_SectionDetails_Sections">
+          <End Type="StoreRepository.Section" Role="Section" Multiplicity="1" />
+          <End Type="StoreRepository.SectionDetail" Role="SectionDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="SectionDetail">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sections_Sections">
+          <End Type="StoreRepository.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="StoreRepository.Section" Role="Section1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Section1">
+              <PropertyRef Name="SectionIDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sections_SectionTypes">
+          <End Type="StoreRepository.SectionType" Role="SectionType" Multiplicity="0..1" />
+          <End Type="StoreRepository.Section" Role="Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionType">
+              <PropertyRef Name="SectionTypeID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="SectionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="StoreRepository" />
+        <Alias Key="Target" Value="StoreRepository.Store" />
+        <EntityContainerMapping CdmEntityContainer="StoreRepositoryContainer" StorageEntityContainer="StoreRepositoryStoreContainer">
+          <EntitySetMapping Name="SectionDetails">
+            <EntityTypeMapping TypeName="StoreRepository.SectionDetail">
+              <MappingFragment StoreEntitySet="SectionDetails">
+                <ScalarProperty Name="PageKeywords" ColumnName="PageKeywords" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="PageDescription" ColumnName="PageDescription" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="StoreRepository.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Importance" ColumnName="Importance" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateData" ColumnName="UpdateData" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedData" ColumnName="AddedData" />
+                <ScalarProperty Name="SectionTypeID" ColumnName="SectionTypeID" />
+                <ScalarProperty Name="UrlNice" ColumnName="UrlNice" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SectionIDP" ColumnName="SectionIDP" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SectionTypes">
+            <EntityTypeMapping TypeName="StoreRepository.SectionType">
+              <MappingFragment StoreEntitySet="SectionTypes">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SectionTypeID" ColumnName="SectionTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="StoreRepository" >
+        <EntityTypeShape EntityType="StoreRepository.SectionDetail" Width="1.5" PointX="9.125" PointY="2" Height="1.9802864583333339" />
+        <EntityTypeShape EntityType="StoreRepository.Section" Width="1.5" PointX="6.875" PointY="0.875" Height="4.0956022135416656" />
+        <EntityTypeShape EntityType="StoreRepository.SectionType" Width="1.5" PointX="4.625" PointY="2.125" Height="1.5956835937499996" />
+        <AssociationConnector Association="StoreRepository.FK_SectionDetails_Sections" >
+          <ConnectorPoint PointX="8.375" PointY="2.9901432291666667" />
+          <ConnectorPoint PointX="9.125" PointY="2.9901432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="StoreRepository.FK_Sections_Sections" >
+          <ConnectorPoint PointX="7.4069230769230776" PointY="4.9706022135416656" />
+          <ConnectorPoint PointX="7.4069230769230776" PointY="5.2206022135416656" />
+          <ConnectorPoint PointX="7.8534615384615387" PointY="5.2206022135416656" />
+          <ConnectorPoint PointX="7.8534615384615387" PointY="4.9706022135416656" />
+        </AssociationConnector>
+        <AssociationConnector Association="StoreRepository.FK_Sections_SectionTypes" >
+          <ConnectorPoint PointX="6.125" PointY="2.922841796875" />
+          <ConnectorPoint PointX="6.875" PointY="2.922841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
